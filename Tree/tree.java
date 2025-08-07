@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
 class Node{
     int data;
     Node left;
@@ -24,6 +27,24 @@ class Build{
         return newNode;
     }
 
+    static void levelWise(Node root){
+        if(root==null) return;
+
+        Queue<Node>q = new LinkedList<>();
+        q.add(root);
+        while (!q.isEmpty()) {
+            Node cuNode = q.poll();
+            System.out.println(cuNode.data+" ");
+            if(cuNode.left!=null){
+                q.add(cuNode.left);
+            }
+            if(cuNode.right!=null){
+                q.add(cuNode.right);
+            }
+        }
+
+    }
+
     void preorder(Node root){
         if(root==null) return ;
         System.out.print(root.data+" ");
@@ -45,6 +66,12 @@ class Build{
         inorder(root.right);
 
     }
+
+    int sum(Node root){
+        if(root==null) return 0;
+        return root.data+sum(root.left)+sum(root.right);
+    }
+     
 }
 
 
@@ -61,6 +88,9 @@ public class tree {
         System.out.println();
         System.out.println("inorder");
         list.inorder(temp);
+        System.out.println();
+        list.levelWise(temp);
+        System.out.println(list.sum(temp));
 
     }
 } 
